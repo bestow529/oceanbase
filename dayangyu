@@ -1,0 +1,27 @@
+CREATE OR REPLACE FUNCTION hello_repeat(count INT)
+RETURNS VARCHAR(4000)
+DETERMINISTIC
+BEGIN
+DECLARE result VARCHAR(4000);
+DECLARE i INT;
+
+IF count IS NULL THEN  
+    RETURN NULL;  
+END IF;  
+
+IF count <= 0 THEN  
+    RETURN '';  
+END IF;  
+
+SET result = '';  
+
+SET i = 1;  
+WHILE i <= count DO  
+    SET result = CONCAT(result, 'Hello, OceanBase!');  
+    IF i < count THEN  
+        SET result = CONCAT(result, ' ');  
+    END IF;  
+    SET i = i + 1;  
+END WHILE;  
+
+RETURN result;  
